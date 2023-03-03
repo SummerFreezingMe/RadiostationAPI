@@ -7,12 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "music_pieces")
 public class MusicPiece {
     @Id
     private Long pieceId;
@@ -26,7 +28,6 @@ public class MusicPiece {
     private String albumName;
 
     private Integer albumYear;
-
 
     private Long genreId;
 

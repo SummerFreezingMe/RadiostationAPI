@@ -1,16 +1,12 @@
 package ru.bykov.radiostationapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.bykov.radiostationapi.service.impl.RepertoireServiceImpl;
 
 import java.util.Map;
 
-@Controller
+@RestController
 public class RepertoireController {
 
     private final RepertoireServiceImpl sas;
@@ -21,8 +17,8 @@ public class RepertoireController {
     }
 
     @RequestMapping(value = "/incoming_call", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
-    public Map<String, String> receiveIncomingCall(@RequestParam String musicPieceId) {
-        return sas.fetchIncomingCall(musicPieceId);
+    public Map<String, String> receiveIncomingCall(@RequestParam Map<String, String> payload) {
+        return sas.fetchIncomingCall(payload);
     }
 
 
