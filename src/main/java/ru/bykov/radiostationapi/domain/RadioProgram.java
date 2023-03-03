@@ -8,14 +8,14 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "music_pieces")
+@Table(name = "radio_programs")
 public class RadioProgram {
     @Id
     private Long programId;
@@ -26,5 +26,5 @@ public class RadioProgram {
 
     private Integer length;
 
-    private LocalDate startingDate;
+    private LocalDateTime startingDate;
 }
