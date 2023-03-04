@@ -2,6 +2,7 @@ package ru.bykov.radiostationapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
 import ru.bykov.radiostationapi.service.impl.RepertoireServiceImpl;
 
 import java.util.Map;
@@ -23,8 +24,8 @@ public class RepertoireController {
 
 
     @RequestMapping(value = "/add_music", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
-    public Map<String, String> addMusicPiece(@RequestBody Map<String, String> payload) {
-        return sas.addMusicPiece(payload);
+    public Map<String, String> addMusicPiece(@RequestBody MusicPieceDto musicPiece) {
+        return sas.addMusicPiece(musicPiece);
     }
 
 }

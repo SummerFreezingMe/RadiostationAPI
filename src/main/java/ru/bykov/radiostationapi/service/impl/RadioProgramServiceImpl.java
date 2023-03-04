@@ -2,6 +2,7 @@ package ru.bykov.radiostationapi.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.RadioProgram;
+import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
 import ru.bykov.radiostationapi.repositories.RadioProgramRepository;
 import ru.bykov.radiostationapi.service.RadioProgramService;
 
@@ -19,12 +20,12 @@ public class RadioProgramServiceImpl implements RadioProgramService {
         this.radioProgramRepository = radioProgramRepository;
     }
 
-    public Map<String, String> createRadioProgram(Map<String, String> payload) {
+    public Map<String, String> createRadioProgram(RadioProgramDto payload) {
         Map<String, String> data = new HashMap<>();
         RadioProgram newProgram = new RadioProgram(
-                Long.valueOf(payload.get("programId")), payload.get("programName"),
-                payload.get("programType"), 0,
-                LocalDateTime.parse(payload.get("startingDate")));
+                payload.getProgramId(), payload.getProgramName(),
+                payload.getProgramType(), 0,
+                LocalDateTime.parse(payload.getStartingDate()));
         radioProgramRepository.save(newProgram);
         data.put("status", "200");
         return data;
