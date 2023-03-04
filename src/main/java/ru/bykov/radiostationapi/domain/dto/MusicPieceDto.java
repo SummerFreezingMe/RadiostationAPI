@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MusicPieceDto {
     private Long pieceId;
+
     private String title;
 
     private String author;

@@ -18,8 +18,7 @@ public class RepertoireServiceImpl implements RepertoireService {
         this.mpr = mpr;
     }
 
-    public Map<String, String> fetchIncomingCall(Map<String, String> payload) {
-        Map<String, String> data = new HashMap<>();
+    public String fetchIncomingCall(Map<String, String> payload) {
         MusicPiece requestSong;
         Random r = new Random();
         List<MusicPiece> requestOptions = new ArrayList<>();
@@ -35,8 +34,8 @@ public class RepertoireServiceImpl implements RepertoireService {
         requestSong = requestOptions.get(r.nextInt(requestOptions.size()));
         requestSong.setRating(requestSong.getRating() + 1.0f);
         mpr.save(requestSong);
-        data.put("OK", "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthor());
-        return data;
+
+        return "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthor();
     }
 
     public Map<String, String> addMusicPiece(MusicPieceDto payload) {

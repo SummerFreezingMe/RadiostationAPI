@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.bykov.radiostationapi.domain.id.MusicProgramPK;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -20,7 +17,10 @@ import javax.persistence.Table;
 @IdClass(MusicProgramPK.class)
 public class MusicPrograms {
     @Id
+    @Column(name = "radio_program_id")
     private Long radioProgramId;
+
     @Id
+    @Column(name = "music_piece_id")
     private Long musicPieceId;
 }
