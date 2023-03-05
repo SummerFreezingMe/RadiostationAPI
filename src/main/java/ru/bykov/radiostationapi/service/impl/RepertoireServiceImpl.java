@@ -1,7 +1,9 @@
 package ru.bykov.radiostationapi.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.bykov.radiostationapi.domain.Artist;
 import ru.bykov.radiostationapi.domain.MusicPiece;
+import ru.bykov.radiostationapi.domain.dto.ArtistDto;
 import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
 import ru.bykov.radiostationapi.repositories.MusicPieceRepository;
 import ru.bykov.radiostationapi.service.RepertoireService;
@@ -13,6 +15,7 @@ import java.util.*;
 public class RepertoireServiceImpl implements RepertoireService {
 
     private final MusicPieceRepository mpr;
+    //private final MusicPieceRepository mpr;
 
     public RepertoireServiceImpl(MusicPieceRepository mpr) {
         this.mpr = mpr;
@@ -41,7 +44,7 @@ public class RepertoireServiceImpl implements RepertoireService {
     public Map<String, String> addMusicPiece(MusicPieceDto payload) {
         Map<String, String> data = new HashMap<>();
 
-        MusicPiece addition = new MusicPiece(payload.getPieceId(),
+        MusicPiece addition = new MusicPiece(
                 payload.getTitle(), payload.getAuthor(), payload.getPerformer(),
                 payload.getAlbumName(), payload.getAlbumYear(), payload.getGenreId(),
                 payload.getPieceLength(), 0f);
@@ -50,4 +53,12 @@ public class RepertoireServiceImpl implements RepertoireService {
         return data;
     }
 
+    public Map<String, String> addArtist(ArtistDto artist) {
+        Map<String, String> data = new HashMap<>();
+
+        Artist addition = new Artist(artist.getArtistName());
+       //mpr.save(addition);
+        data.put("status", "200");
+        return data;
+    }
 }

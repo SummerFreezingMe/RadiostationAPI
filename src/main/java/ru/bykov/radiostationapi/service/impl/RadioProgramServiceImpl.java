@@ -22,8 +22,7 @@ public class RadioProgramServiceImpl implements RadioProgramService {
 
     public Map<String, String> createRadioProgram(RadioProgramDto payload) {
         Map<String, String> data = new HashMap<>();
-        RadioProgram newProgram = new RadioProgram(
-                payload.getProgramId(), payload.getProgramName(),
+        RadioProgram newProgram = new RadioProgram(payload.getProgramName(),
                 payload.getProgramType(), 0,
                 LocalDateTime.parse(payload.getStartingDate()));
         radioProgramRepository.save(newProgram);

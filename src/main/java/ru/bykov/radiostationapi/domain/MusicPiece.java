@@ -1,24 +1,31 @@
 package ru.bykov.radiostationapi.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "music_pieces")
 public class MusicPiece {
+    public MusicPiece(String title, String author, String performer, String albumName, Integer albumYear, Long genreId, Integer pieceLength, Float rating) {
+        this.title = title;
+        this.author = author;
+        this.performer = performer;
+        this.albumName = albumName;
+        this.albumYear = albumYear;
+        this.genreId = genreId;
+        this.pieceLength = pieceLength;
+        this.rating = rating;
+    }
+
     @Id
     @Column(name = "piece_id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long pieceId;
 
     @Column(name = "title")
