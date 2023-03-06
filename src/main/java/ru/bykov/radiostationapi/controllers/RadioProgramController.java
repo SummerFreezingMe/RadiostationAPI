@@ -1,9 +1,7 @@
 package ru.bykov.radiostationapi.controllers;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.bykov.radiostationapi.domain.RadioProgram;
 import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
 import ru.bykov.radiostationapi.service.impl.RadioProgramServiceImpl;
 
@@ -18,8 +16,25 @@ public class RadioProgramController {
         this.rps = rps;
     }
 
-    @RequestMapping(value = "/add_program", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
+    @PostMapping(value = "/add_program", produces = {"application/json", "application/xml"})
     public Map<String, String> addRadioProgram(@RequestBody RadioProgramDto radioProgram) {
         return rps.createRadioProgram(radioProgram);
+    }
+
+    @GetMapping(value = "/get_current_program",
+            produces = {"application/json", "application/xml"})
+    public RadioProgram getCurrentProgram() {
+        return rps.getCurrentRadioProgram();
+    }
+
+    @GetMapping(value = "/get_program/{id}",
+            produces = {"application/json", "application/xml"})
+    public RadioProgram getProgram(@PathVariable Long id) {
+        return rps.getRadioProgram(id);
+    }
+
+    @DeleteMapping(value = "/delete_program", produces = {"application/json", "application/xml"})
+    public Map<String, String> deleteRadioProgram(@RequestBody RadioProgramDto radioProgram) {
+        return rps.deleteRadioProgram(radioProgram);
     }
 }

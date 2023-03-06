@@ -1,9 +1,7 @@
 package ru.bykov.radiostationapi.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.bykov.radiostationapi.domain.Artist;
 import ru.bykov.radiostationapi.domain.MusicPiece;
-import ru.bykov.radiostationapi.domain.dto.ArtistDto;
 import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
 import ru.bykov.radiostationapi.repositories.MusicPieceRepository;
 import ru.bykov.radiostationapi.service.RepertoireService;
@@ -15,7 +13,7 @@ import java.util.*;
 public class RepertoireServiceImpl implements RepertoireService {
 
     private final MusicPieceRepository mpr;
-    //private final MusicPieceRepository mpr;
+
 
     public RepertoireServiceImpl(MusicPieceRepository mpr) {
         this.mpr = mpr;
@@ -53,11 +51,10 @@ public class RepertoireServiceImpl implements RepertoireService {
         return data;
     }
 
-    public Map<String, String> addArtist(ArtistDto artist) {
+    public Map<String, String> deleteMusicPiece(Long musicPieceId) {
         Map<String, String> data = new HashMap<>();
-
-        Artist addition = new Artist(artist.getArtistName());
-       //mpr.save(addition);
+        MusicPiece deleted = mpr.findByPieceId(musicPieceId);
+        mpr.delete(deleted);
         data.put("status", "200");
         return data;
     }

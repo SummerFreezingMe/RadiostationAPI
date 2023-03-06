@@ -13,11 +13,11 @@ import javax.persistence.*;
 @Table(name = "genres")
 public class Genre {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "genre_id")
     private Long genreId;
 
-    public Genre(String genreName, Long rating) {
+    public Genre(String genreName, Float rating) {
         this.genreName = genreName;
         this.rating = rating;
     }
@@ -25,5 +25,5 @@ public class Genre {
     @Column(name = "genre_name")
     private String genreName;
     @Column(name = "rating")
-    private Long rating;
+    private Float rating;
 }

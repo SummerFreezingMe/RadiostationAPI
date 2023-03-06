@@ -13,4 +13,7 @@ public interface MusicPieceRepository extends CrudRepository<MusicPiece, Long> {
     Optional<MusicPiece> findByAuthor(String author);
 
     Optional<MusicPiece> findByGenreId(Long genre);
+
+
+    MusicPiece findByPieceId(Long musicPieceId);
 }

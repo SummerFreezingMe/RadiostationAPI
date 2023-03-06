@@ -6,7 +6,6 @@ import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
 import ru.bykov.radiostationapi.repositories.RadioProgramRepository;
 import ru.bykov.radiostationapi.service.RadioProgramService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class RadioProgramServiceImpl implements RadioProgramService {
         Map<String, String> data = new HashMap<>();
         RadioProgram newProgram = new RadioProgram(payload.getProgramName(),
                 payload.getProgramType(), 0,
-                LocalDateTime.parse(payload.getStartingDate()));
+                payload.getStartingDate());
         radioProgramRepository.save(newProgram);
         data.put("status", "200");
         return data;
@@ -32,6 +31,20 @@ public class RadioProgramServiceImpl implements RadioProgramService {
 
     public RadioProgram getCurrentRadioProgram() {
         return radioProgramRepository.findRadioProgramByStartingDateOrderByStartingDate(
-                LocalDate.now());
+                LocalDateTime.now());
     }
+
+    public Map<String, String> deleteRadioProgram(RadioProgramDto radioProgram) {
+        Map<String, String> data = new HashMap<>();
+            RadioProgram deleted = radioProgramRepository.findByProgramTypeAndStartingDateAndProgramName(
+                radioProgram.getProgramType(),radioProgram.getStartingDate(),
+                radioProgram.getProgramName());
+    radioProgramRepository.delete(deleted);
+        data.put("status", "200");
+        return data;
+
+    }
+
+    public RadioProgram getRadioProgram(Long id) {
+        return radioProgramRepository.findByProgramId(id);}
 }
