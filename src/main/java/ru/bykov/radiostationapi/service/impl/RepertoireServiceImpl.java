@@ -22,17 +22,15 @@ public class RepertoireServiceImpl implements RepertoireService {
     public String fetchIncomingCall(Map<String, String> payload) {
         MusicPiece requestSong;
         Random r = new Random();
-        List<MusicPiece> requestOptions = new ArrayList<>();
-        Optional<MusicPiece> request;
+        List<MusicPiece> request;
         switch (payload.keySet().toArray()[0].toString()) {
-            case ("song") -> request = mpr.findById(Long.valueOf(payload.get("song")));
+            case ("song") -> request = Collections.singletonList(mpr.findByPieceId(Long.valueOf(payload.get("song"))));
             case ("artist") -> request = mpr.findByAuthor(payload.get("artist"));
             case ("album") -> request = mpr.findByAlbumName(payload.get("album"));
             case ("genre") -> request = mpr.findByGenreId(Long.valueOf(payload.get("genre")));
             default -> throw new IllegalStateException("Unexpected value: " + payload.keySet().toArray()[0].toString());
         }
-        request.ifPresent(requestOptions::add);
-        requestSong = requestOptions.get(r.nextInt(requestOptions.size()));
+        requestSong = request.get(r.nextInt(request.size()));
         requestSong.setRating(requestSong.getRating() + 1.0f);
         mpr.save(requestSong);
 
@@ -53,8 +51,7 @@ public class RepertoireServiceImpl implements RepertoireService {
 
     public Map<String, String> deleteMusicPiece(Long musicPieceId) {
         Map<String, String> data = new HashMap<>();
-        MusicPiece deleted = mpr.findByPieceId(musicPieceId);
-        mpr.delete(deleted);
+        mpr.deleteById(musicPieceId);
         data.put("status", "200");
         return data;
     }
