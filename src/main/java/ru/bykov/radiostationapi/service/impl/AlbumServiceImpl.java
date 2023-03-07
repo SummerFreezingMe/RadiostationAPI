@@ -19,17 +19,17 @@ private final AlbumRepository ar;
     }
 
     public Map<String, String> addAlbum(AlbumDto album) {
-        Album newArtist = new Album(album.getAlbumTitle(),
+        Album newAlbum = new Album(album.getAlbumTitle(),
                 album.getAlbumYear(),album.getArtistId());
-        ar.save(newArtist);
+        ar.save(newAlbum);
         Map<String, String> data = new HashMap<>();
         data.put("status", "200");
         return data;
     }
 
     public Map<String, String> deleteAlbum(Long id) {
-        Album deleted = ar.findByAlbumId(id);
-        ar.delete(deleted);
+
+        ar.deleteById(id);
         Map<String, String> data = new HashMap<>();
         data.put("status", "200");
         return data;
