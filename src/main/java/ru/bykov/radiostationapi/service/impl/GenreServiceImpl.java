@@ -20,8 +20,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     public Map<String, String> deleteGenre(Long id) {
-        Genre deleted = gr.findByGenreId(id);
-        gr.delete(deleted);
+        gr.deleteById(id);
         Map<String, String> data = new HashMap<>();
         data.put("status", "200");
         return data;

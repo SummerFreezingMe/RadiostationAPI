@@ -33,9 +33,7 @@ public class ArtistServiceImpl implements ArtistService {
 
 
     public Map<String, String> deleteArtist(Long id) {
-
-        Artist deleted = ar.findByArtistId(id);
-        ar.delete(deleted);
+        ar.deleteById(id);
         Map<String, String> data = new HashMap<>();
         data.put("status", "200");
         return data;
