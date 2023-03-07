@@ -1,5 +1,6 @@
 package ru.bykov.radiostationapi.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.RadioProgram;
 import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class RadioProgramServiceImpl implements RadioProgramService {
 
     private final RadioProgramRepository radioProgramRepository;
-
+@Autowired
     public RadioProgramServiceImpl(RadioProgramRepository radioProgramRepository) {
         this.radioProgramRepository = radioProgramRepository;
     }
@@ -39,7 +40,7 @@ public class RadioProgramServiceImpl implements RadioProgramService {
             RadioProgram deleted = radioProgramRepository.findByProgramTypeAndStartingDateAndProgramName(
                 radioProgram.getProgramType(),radioProgram.getStartingDate(),
                 radioProgram.getProgramName());
-    radioProgramRepository.delete(deleted);
+    radioProgramRepository.deleteById(deleted.getProgramId());
         data.put("status", "200");
         return data;
 
