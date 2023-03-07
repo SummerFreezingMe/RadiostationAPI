@@ -28,15 +28,18 @@ public class RepertoireServiceImpl implements RepertoireService {
             case ("song") -> request = mpr.findById(Long.valueOf(payload.get("song")));
             case ("artist") -> request = mpr.findByAuthor(payload.get("artist"));
             case ("album") -> request = mpr.findByAlbumName(payload.get("album"));
-            case ("genre") -> request = mpr.findByGenreId(Long.valueOf(payload.get("genre")));
-            default -> throw new IllegalStateException("Unexpected value: " + payload.keySet().toArray()[0].toString());
+            case ("genre") -> request = mpr.findByGenreId(
+                    Long.valueOf(payload.get("genre")));
+            default -> throw new IllegalStateException("Unexpected value: "
+                    + payload.keySet().toArray()[0].toString());
         }
         request.ifPresent(requestOptions::add);
         requestSong = requestOptions.get(r.nextInt(requestOptions.size()));
         requestSong.setRating(requestSong.getRating() + 1.0f);
         mpr.save(requestSong);
 
-        return "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthor();
+        return "You requested: " + requestSong.getTitle() + " by " +
+                requestSong.getAuthor();
     }
 
     public Map<String, String> addMusicPiece(MusicPieceDto payload) {

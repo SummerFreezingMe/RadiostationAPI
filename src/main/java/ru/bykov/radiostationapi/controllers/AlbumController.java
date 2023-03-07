@@ -8,10 +8,8 @@ import ru.bykov.radiostationapi.service.impl.AlbumServiceImpl;
 import java.util.Map;
 
 @RestController
-
 public class AlbumController {
     private final AlbumServiceImpl as;
-
 
     public AlbumController(AlbumServiceImpl as) {
         this.as = as;
@@ -27,10 +25,8 @@ public class AlbumController {
         return as.getAlbum(id);
     }
 
-    @DeleteMapping(value = "/delete_album/{id}",
-            produces = {"application/json", "application/xml"})
-    public Map<String, String> deleteAlbum(
-            @PathVariable Long id) {
+    @DeleteMapping(value = "/delete_album/{id}", produces = {"application/json", "application/xml"})
+    public Map<String, String> deleteAlbum(@PathVariable Long id) {
         return as.deleteAlbum(id);
     }
 }

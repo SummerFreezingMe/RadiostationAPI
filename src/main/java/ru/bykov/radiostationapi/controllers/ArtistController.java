@@ -12,7 +12,6 @@ public class ArtistController {
 
     private final ArtistServiceImpl as;
 
-
     public ArtistController(ArtistServiceImpl as) {
         this.as = as;
     }
