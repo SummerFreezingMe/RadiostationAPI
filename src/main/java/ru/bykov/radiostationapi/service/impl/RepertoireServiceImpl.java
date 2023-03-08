@@ -1,8 +1,10 @@
 package ru.bykov.radiostationapi.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.MusicPiece;
 import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
+import ru.bykov.radiostationapi.mapper.MusicPieceMapper;
 import ru.bykov.radiostationapi.repositories.MusicPieceRepository;
 import ru.bykov.radiostationapi.service.RepertoireService;
 
@@ -13,10 +15,11 @@ import java.util.*;
 public class RepertoireServiceImpl implements RepertoireService {
 
     private final MusicPieceRepository mpr;
-
-
-    public RepertoireServiceImpl(MusicPieceRepository mpr) {
+    private final MusicPieceMapper mpm;
+@Autowired
+    public RepertoireServiceImpl(MusicPieceRepository mpr, MusicPieceMapper mpm) {
         this.mpr = mpr;
+        this.mpm = mpm;
     }
 
     public String fetchIncomingCall(Map<String, String> payload) {
@@ -42,13 +45,9 @@ public class RepertoireServiceImpl implements RepertoireService {
                 requestSong.getAuthor();
     }
 
-    public Map<String, String> addMusicPiece(MusicPieceDto payload) {
+    public Map<String, String> addMusicPiece(MusicPieceDto musicPiece) {
         Map<String, String> data = new HashMap<>();
-
-        MusicPiece addition = new MusicPiece(
-                payload.getTitle(), payload.getAuthor(), payload.getPerformer(),
-                payload.getAlbumName(), payload.getAlbumYear(), payload.getGenreId(),
-                payload.getPieceLength(), 0f);
+        MusicPiece addition = mpm.toEntity(musicPiece);
         mpr.save(addition);
         data.put("status", "200");
         return data;
