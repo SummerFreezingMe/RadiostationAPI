@@ -2,7 +2,7 @@ package ru.bykov.radiostationapi.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import ru.bykov.radiostationapi.domain.RadioProgram;
-import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
+import ru.bykov.radiostationapi.domain.dto.in.RadioProgramDto;
 import ru.bykov.radiostationapi.service.impl.RadioProgramServiceImpl;
 
 import java.util.Map;

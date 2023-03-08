@@ -1,4 +1,4 @@
-package ru.bykov.radiostationapi.domain.dto;
+package ru.bykov.radiostationapi.domain.dto.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RadioProgramDto {
+public class GetRadioProgramDto {
 
     private String programName;
 
     private String programType;
 
     private LocalDateTime startingDate;
+
 }

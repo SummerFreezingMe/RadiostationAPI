@@ -3,7 +3,8 @@ package ru.bykov.radiostationapi.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.MusicPiece;
-import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
+import ru.bykov.radiostationapi.domain.dto.in.MusicPieceDto;
+import ru.bykov.radiostationapi.domain.dto.out.GetMusicPieceDto;
 import ru.bykov.radiostationapi.mapper.MusicPieceMapper;
 import ru.bykov.radiostationapi.repositories.MusicPieceRepository;
 import ru.bykov.radiostationapi.service.RepertoireService;
@@ -22,7 +23,7 @@ public class RepertoireServiceImpl implements RepertoireService {
         this.mpm = mpm;
     }
 
-    public String fetchIncomingCall(Map<String, String> payload) {
+    public GetMusicPieceDto fetchIncomingCall(Map<String, String> payload) {
         MusicPiece requestSong;
         Random r = new Random();
         List<MusicPiece> requestOptions = new ArrayList<>();
@@ -40,24 +41,18 @@ public class RepertoireServiceImpl implements RepertoireService {
         requestSong = requestOptions.get(r.nextInt(requestOptions.size()));
         requestSong.setRating(requestSong.getRating() + 1.0f);
         mpr.save(requestSong);
-
-        return "You requested: " + requestSong.getTitle() + " by " +
-                requestSong.getAuthor();
+        return mpm.toDto(requestSong);
     }
 
-    public Map<String, String> addMusicPiece(MusicPieceDto musicPiece) {
-        Map<String, String> data = new HashMap<>();
+    public GetMusicPieceDto addMusicPiece(MusicPieceDto musicPiece) {
         MusicPiece addition = mpm.toEntity(musicPiece);
         mpr.save(addition);
-        data.put("status", "200");
-        return data;
+        return mpm.toDto(addition);
     }
 
-    public Map<String, String> deleteMusicPiece(Long musicPieceId) {
-        Map<String, String> data = new HashMap<>();
+    public GetMusicPieceDto deleteMusicPiece(Long musicPieceId) {
         MusicPiece deleted = mpr.findByPieceId(musicPieceId);
         mpr.delete(deleted);
-        data.put("status", "200");
-        return data;
+        return mpm.toDto(deleted);
     }
 }

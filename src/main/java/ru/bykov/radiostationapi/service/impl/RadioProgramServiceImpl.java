@@ -3,7 +3,7 @@ package ru.bykov.radiostationapi.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.RadioProgram;
-import ru.bykov.radiostationapi.domain.dto.RadioProgramDto;
+import ru.bykov.radiostationapi.domain.dto.in.RadioProgramDto;
 import ru.bykov.radiostationapi.mapper.RadioProgramMapper;
 import ru.bykov.radiostationapi.repositories.RadioProgramRepository;
 import ru.bykov.radiostationapi.service.RadioProgramService;

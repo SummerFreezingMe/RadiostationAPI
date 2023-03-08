@@ -1,4 +1,4 @@
-package ru.bykov.radiostationapi.domain.dto;
+package ru.bykov.radiostationapi.domain.dto.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistDto {
-    private String artistName;
-
+public class GenreDto {
+    private String genreName;
 }
