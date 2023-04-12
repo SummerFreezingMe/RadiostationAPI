@@ -20,13 +20,11 @@ public class MusicPieceDto {
     private JdbcTemplate jdbcTemplate;
     private String title;
 
-    private String author;
+    private Long authorId;
 
-    private String performer;
+    private Long performerId;
 
-    private String albumName;
-
-    private Integer albumYear;
+    private Long albumId;
 
     private Long genreId;
 
