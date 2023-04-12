@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface MusicPieceRepository extends CrudRepository<MusicPiece, Long> {
-    Optional<MusicPiece> findByAlbumName(String albumName);
+    Optional<MusicPiece> findByAlbumId(Long albumId);
 
-    Optional<MusicPiece> findByAuthor(String author);
+    Optional<MusicPiece> findByAuthorId(Long author);
 
     Optional<MusicPiece> findByGenreId(Long genre);
 

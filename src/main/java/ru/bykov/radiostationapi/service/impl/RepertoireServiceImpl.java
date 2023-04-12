@@ -30,8 +30,8 @@ public class RepertoireServiceImpl implements RepertoireService {
         Optional<MusicPiece> request;
         switch (payload.keySet().toArray()[0].toString()) {
             case ("song") -> request = mpr.findById(Long.valueOf(payload.get("song")));
-            case ("artist") -> request = mpr.findByAuthor(payload.get("artist"));
-            case ("album") -> request = mpr.findByAlbumName(payload.get("album"));
+            case ("artist") -> request = mpr.findByAuthorId(Long.valueOf(payload.get("artist")));
+            case ("album") -> request = mpr.findByAlbumId(Long.valueOf(payload.get("album")));
             case ("genre") -> request = mpr.findByGenreId(
                     Long.valueOf(payload.get("genre")));
             default -> throw new IllegalStateException("Unexpected value: "

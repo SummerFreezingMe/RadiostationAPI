@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "radio_programs")
+@Table(name = "radio_program")
 public class RadioProgram {
     @Id
     @Column(name = "program_id")
@@ -30,10 +30,4 @@ public class RadioProgram {
     @Column(name = "starting_date")
     private LocalDateTime startingDate;
 
-    public RadioProgram(String programName, String programType, Integer length, LocalDateTime startingDate) {
-        this.programName = programName;
-        this.programType = programType;
-        this.length = length;
-        this.startingDate = startingDate;
-    }
 }

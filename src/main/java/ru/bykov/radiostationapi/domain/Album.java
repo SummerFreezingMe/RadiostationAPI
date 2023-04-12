@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "albums")
+@Table(name = "album")
 public class Album {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,9 +22,4 @@ public class Album {
 
     private Long artistId;
 
-    public Album(String albumTitle, Integer albumYear, Long artistId) {
-        this.albumTitle = albumTitle;
-        this.albumYear = albumYear;
-        this.artistId = artistId;
-    }
 }

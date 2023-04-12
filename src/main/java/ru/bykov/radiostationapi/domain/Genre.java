@@ -10,17 +10,12 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "genres")
+@Table(name = "genre")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "genre_id")
     private Long genreId;
-
-    public Genre(String genreName, Float rating) {
-        this.genreName = genreName;
-        this.rating = rating;
-    }
 
     @Column(name = "genre_name")
     private String genreName;

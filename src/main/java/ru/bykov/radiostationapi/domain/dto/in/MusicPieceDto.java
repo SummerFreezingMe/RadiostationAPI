@@ -13,16 +13,23 @@ public class MusicPieceDto {
 
     private String title;
 
-    private String author;
 
-    private String performer;
+    private Long authorId;
 
-    private String albumName;
 
-    private Integer albumYear;
+    private Long performerId;
+
+
+    private Long albumId;
+
+
 
     private Long genreId;
 
+
     private Integer pieceLength;
+
+
+    private Float rating;
 
 }
