@@ -25,8 +25,8 @@ public class RepertoireServiceImpl implements RepertoireService {
         List<MusicPiece> request;
         switch (payload.keySet().toArray()[0].toString()) {
             case ("song") -> request = Collections.singletonList(mpr.findByPieceId(Long.valueOf(payload.get("song"))));
-            case ("artist") -> request = mpr.findByAuthor(payload.get("artist"));
-            case ("album") -> request = mpr.findByAlbumName(payload.get("album"));
+            case ("artist") -> request = mpr.findByAuthor(Long.valueOf(payload.get("artist")));
+            case ("album") -> request = mpr.findByAlbumName(Long.valueOf(payload.get("album")));
             case ("genre") -> request = mpr.findByGenreId(Long.valueOf(payload.get("genre")));
             default -> throw new IllegalStateException("Unexpected value: " + payload.keySet().toArray()[0].toString());
         }
@@ -34,15 +34,15 @@ public class RepertoireServiceImpl implements RepertoireService {
         requestSong.setRating(requestSong.getRating() + 1.0f);
         mpr.save(requestSong);
 
-        return "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthor();
+        return "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthorId();
     }
 
     public Map<String, String> addMusicPiece(MusicPieceDto payload) {
         Map<String, String> data = new HashMap<>();
 
         MusicPiece addition = new MusicPiece(
-                payload.getTitle(), payload.getAuthor(), payload.getPerformer(),
-                payload.getAlbumName(), payload.getAlbumYear(), payload.getGenreId(),
+                    payload.getTitle(), payload.getAuthorId(), payload.getPerformerId(),
+                payload.getAlbumId(), payload.getGenreId(),
                 payload.getPieceLength(), 0f);
         mpr.save(addition);
         data.put("status", "200");

@@ -16,21 +16,21 @@ public class MusicPieceRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<MusicPiece> findByAlbumName(String albumName) {
+    public List<MusicPiece> findByAlbumName(Long albumName) {
          return jdbcTemplate.query(
-                "SELECT * FROM music_pieces WHERE album_name=?",
+                "SELECT * FROM music_piece WHERE album_id=?",
                 BeanPropertyRowMapper.newInstance(MusicPiece.class), albumName);
     }
 
-    public List<MusicPiece> findByAuthor(String author) {
+    public List<MusicPiece> findByAuthor(Long author) {
         return jdbcTemplate.query(
-                "SELECT * FROM music_pieces WHERE author=?",
+                "SELECT * FROM music_piece WHERE author_id=?",
                 BeanPropertyRowMapper.newInstance(MusicPiece.class), author);
     }
 
     public List<MusicPiece> findByGenreId(Long genre) {
         return jdbcTemplate.query(
-                "SELECT * FROM music_pieces WHERE genre_id=?",
+                "SELECT * FROM music_piece WHERE genre_id=?",
                 BeanPropertyRowMapper.newInstance(MusicPiece.class), genre);
     }
 
@@ -43,35 +43,35 @@ public class MusicPieceRepository {
         try {
 
             return jdbcTemplate.queryForObject(
-                    "SELECT * FROM music_pieces WHERE piece_id=?",
+                    "SELECT * FROM music_piece WHERE piece_id=?",
                     BeanPropertyRowMapper.newInstance(MusicPiece.class), id);
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
     }
 
-    public void save(MusicPiece genre) {
-        jdbcTemplate.update("INSERT INTO music_pieces ("+
-                        "piece_id,title,author,performer,album_name,album_year,genre_id,piece_length,"+
-                        " rating)VALUES(?,?,?,?,?,?,?,?,?)",
-                count()+1, genre.getPieceLength(),genre.getAuthor(),genre.getPerformer(),
-                genre.getAlbumName(),genre.getAlbumYear(),genre.getGenreId(),genre.getPieceLength(),
-                genre.getRating());
+    public void save(MusicPiece musicPiece) {
+        jdbcTemplate.update("INSERT INTO music_piece ("+
+                        "piece_id,title,album_id,genre_id,piece_length,"+
+                        " rating,author_id,performer_id)VALUES(?,?,?,?,?,?,?,?)",
+                count()+1, musicPiece.getPieceLength(),musicPiece.getAuthorId(),musicPiece.getPerformerId(),
+                musicPiece.getAlbumId(),musicPiece.getGenreId(),musicPiece.getPieceLength(),
+                musicPiece.getRating());
     }
 
     public void deleteById(Long id) {
         jdbcTemplate.update(
-                "DELETE FROM music_pieces WHERE genre_id=?", id);
+                "DELETE FROM music_piece WHERE genre_id=?", id);
     }
 
 
     public List<MusicPiece> findAll() {
-        return jdbcTemplate.query("SELECT * from music_pieces",
+        return jdbcTemplate.query("SELECT * from music_piece",
                 BeanPropertyRowMapper.newInstance(MusicPiece.class));
     }
 
     public int count() {
-        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM music_pieces", Integer.class);
+        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM music_piece", Integer.class);
 
     }
 

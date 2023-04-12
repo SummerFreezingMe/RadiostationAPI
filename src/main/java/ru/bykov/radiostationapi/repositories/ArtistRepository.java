@@ -20,7 +20,7 @@ public class ArtistRepository  {
         try {
 
             return jdbcTemplate.queryForObject(
-                    "SELECT * FROM artists WHERE artist_id=?",
+                    "SELECT * FROM artist WHERE artist_id=?",
                     BeanPropertyRowMapper.newInstance(Artist.class), id);
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
@@ -28,27 +28,27 @@ public class ArtistRepository  {
     }
 
     public void save(Artist artist) {
-        jdbcTemplate.update("INSERT INTO artists (artist_id, artist_name) " +
+        jdbcTemplate.update("INSERT INTO artist (artist_id, artist_name) " +
                         "VALUES(?,?)",
                 count()+1, artist.getArtistName());
     }
 
     public void deleteAll() {
-        jdbcTemplate.update("DELETE from artists");
+        jdbcTemplate.update("DELETE from artist");
     }
 
     public void deleteById(Long id) {
-        jdbcTemplate.update("DELETE FROM artists WHERE artist_id=?", id);
+        jdbcTemplate.update("DELETE FROM artist WHERE artist_id=?", id);
     }
 
 
     public List<Album> findAll() {
-        return jdbcTemplate.query("SELECT * from artists",
+        return jdbcTemplate.query("SELECT * from artist",
                 BeanPropertyRowMapper.newInstance(Album.class));
     }
 
     public int count() {
-        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM albums", Integer.class);
+        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM album", Integer.class);
 
     }
 }

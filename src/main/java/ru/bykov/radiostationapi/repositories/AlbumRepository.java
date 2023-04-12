@@ -18,39 +18,38 @@ public class AlbumRepository {
 
     public Album findByAlbumId(Long id) {
         try {
-            Album album = jdbcTemplate.queryForObject(
-                    "SELECT * FROM albums WHERE id=?",
-                    BeanPropertyRowMapper.newInstance(Album.class), id);
 
-            return album;
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM album WHERE id=?",
+                    BeanPropertyRowMapper.newInstance(Album.class), id);
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
     }
 
     public void save(Album album) {
-        jdbcTemplate.update("INSERT INTO albums (album_id, album_title, " +
+        jdbcTemplate.update("INSERT INTO album (album_id, album_title, " +
                         "album_year,artist_id) VALUES(?,?,?,?)",
                 count()+1, album.getAlbumTitle(), album.getAlbumYear(),
                 album.getArtistId());
     }
 
     public void deleteAll() {
-        jdbcTemplate.update("DELETE from albums");
+        jdbcTemplate.update("DELETE from album");
     }
 
     public void deleteById(Long id) {
-        jdbcTemplate.update("DELETE FROM albums WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM album WHERE id=?", id);
     }
 
 
     public List<Album> findAll() {
-        return jdbcTemplate.query("SELECT * from albums",
+        return jdbcTemplate.query("SELECT * from album",
                 BeanPropertyRowMapper.newInstance(Album.class));
     }
 
     public int count() {
-        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM albums", Integer.class);
+        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM album", Integer.class);
 
     }
 }

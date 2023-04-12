@@ -10,14 +10,14 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "music_pieces")
+@Table(name = "music_piece")
 public class MusicPiece {
-    public MusicPiece(String title, String author, String performer, String albumName, Integer albumYear, Long genreId, Integer pieceLength, Float rating) {
+    public MusicPiece(String title, Long author, Long performer, Long albumName, Long genreId, Integer pieceLength, Float rating) {
         this.title = title;
-        this.author = author;
-        this.performer = performer;
-        this.albumName = albumName;
-        this.albumYear = albumYear;
+        this.authorId = author;
+        this.performerId = performer;
+        this.albumId = albumName;
+
         this.genreId = genreId;
         this.pieceLength = pieceLength;
         this.rating = rating;
@@ -31,17 +31,15 @@ public class MusicPiece {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "author")
-    private String author;
+    @Column(name = "author_id")
+    private Long authorId;
 
-    @Column(name = "performer")
-    private String performer;
+    @Column(name = "performer_id")
+    private Long performerId;
 
-    @Column(name = "album_name")
-    private String albumName;
+    @Column(name = "album_id")
+    private Long albumId;
 
-    @Column(name = "album_year")
-    private Integer albumYear;
 
     @Column(name = "genre_id")
     private Long genreId;

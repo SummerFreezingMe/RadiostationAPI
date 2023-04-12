@@ -18,14 +18,14 @@ public class RadioProgramRepository  {
 
     public RadioProgram findRadioProgramByStartingDateOrderByStartingDate(LocalDateTime now) {
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM radio_programs WHERE starting_date<? " +
+                "SELECT * FROM radio_program WHERE starting_date<? " +
                         "ORDER BY starting_date DESC",
                 BeanPropertyRowMapper.newInstance(RadioProgram.class), now);
     }
 
     public RadioProgram findByProgramTypeAndStartingDateAndProgramName(String program, LocalDateTime ldt, String programName) {
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM radio_programs WHERE program_type=?1 AND starting_date=?2 " +
+                "SELECT * FROM radio_program WHERE program_type=?1 AND starting_date=?2 " +
                         "AND program_type=?3",
                 BeanPropertyRowMapper.newInstance(RadioProgram.class), program,ldt,programName);
     }
@@ -39,7 +39,7 @@ public class RadioProgramRepository  {
         try {
 
             return jdbcTemplate.queryForObject(
-                    "SELECT * FROM radio_programs WHERE program_id=?",
+                    "SELECT * FROM radio_program WHERE program_id=?",
                     BeanPropertyRowMapper.newInstance(RadioProgram.class), id);
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
@@ -47,7 +47,7 @@ public class RadioProgramRepository  {
     }
 
     public void save(RadioProgram radioProgram) {
-        jdbcTemplate.update("INSERT INTO radio_programs ("+
+        jdbcTemplate.update("INSERT INTO radio_program ("+
                         "program_id,program_type,length,starting_date,program_name)" +
                         "VALUES(?,?,?,?,?)",
                     count()+1, radioProgram.getProgramType(),radioProgram.getLength(),
@@ -56,17 +56,17 @@ public class RadioProgramRepository  {
 
     public void deleteById(Long id) {
         jdbcTemplate.update(
-                "DELETE FROM radio_programs WHERE program_id=?", id);
+                "DELETE FROM radio_program WHERE program_id=?", id);
     }
 
 
     public List<RadioProgram> findAll() {
-        return jdbcTemplate.query("SELECT * from music_pieces",
+        return jdbcTemplate.query("SELECT * from music_piece",
                 BeanPropertyRowMapper.newInstance(RadioProgram.class));
     }
 
     public int count() {
-        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM radio_programs", Integer.class);
+        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM radio_program", Integer.class);
 
     }
 

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "radio_programs")
+@Table(name = "radio_program")
 public class RadioProgram {
     @Id
     @Column(name = "program_id")
