@@ -3,6 +3,7 @@ package ru.bykov.radiostationapi.service.impl;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.MusicPiece;
 import ru.bykov.radiostationapi.domain.dto.MusicPieceDto;
+import ru.bykov.radiostationapi.mapper.MusicPieceMapper;
 import ru.bykov.radiostationapi.repositories.MusicPieceRepository;
 import ru.bykov.radiostationapi.service.RepertoireService;
 
@@ -14,9 +15,12 @@ public class RepertoireServiceImpl implements RepertoireService {
 
     private final MusicPieceRepository mpr;
 
+    private final MusicPieceMapper musicPieceMapper;
 
-    public RepertoireServiceImpl(MusicPieceRepository mpr) {
+
+    public RepertoireServiceImpl(MusicPieceRepository mpr, MusicPieceMapper musicPieceMapper) {
         this.mpr = mpr;
+        this.musicPieceMapper = musicPieceMapper;
     }
 
     public String fetchIncomingCall(Map<String, String> payload) {
@@ -37,16 +41,13 @@ public class RepertoireServiceImpl implements RepertoireService {
         return "You requested: " + requestSong.getTitle() + " by " + requestSong.getAuthorId();
     }
 
-    public Map<String, String> addMusicPiece(MusicPieceDto payload) {
-        Map<String, String> data = new HashMap<>();
-
+    public MusicPieceDto addMusicPiece(MusicPieceDto payload) {
         MusicPiece addition = new MusicPiece(
                     payload.getTitle(), payload.getAuthorId(), payload.getPerformerId(),
                 payload.getAlbumId(), payload.getGenreId(),
                 payload.getPieceLength(), 0f);
         mpr.save(addition);
-        data.put("status", "200");
-        return data;
+        return musicPieceMapper.toDto(addition);
     }
 
     public Map<String, String> deleteMusicPiece(Long musicPieceId) {

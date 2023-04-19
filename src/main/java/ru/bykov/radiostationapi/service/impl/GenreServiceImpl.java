@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.Genre;
 import ru.bykov.radiostationapi.domain.dto.GenreDto;
+import ru.bykov.radiostationapi.mapper.GenreMapper;
 import ru.bykov.radiostationapi.repositories.GenreRepository;
 import ru.bykov.radiostationapi.service.GenreService;
 
@@ -13,10 +14,12 @@ import java.util.Map;
 @Service
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository gr;
+    private final GenreMapper genreMapper;
 
     @Autowired
-    public GenreServiceImpl(GenreRepository gr) {
+    public GenreServiceImpl(GenreRepository gr, GenreMapper genreMapper) {
         this.gr = gr;
+        this.genreMapper = genreMapper;
     }
 
     public Map<String, String> deleteGenre(Long id) {
@@ -26,15 +29,13 @@ public class GenreServiceImpl implements GenreService {
         return data;
     }
 
-    public Genre getGenre(Long id) {
-        return gr.findByGenreId(id);
+    public GenreDto getGenre(Long id) {
+        return genreMapper.toDto(gr.findByGenreId(id));
     }
 
-    public Map<String, String> addGenre(GenreDto genre) {
+    public GenreDto addGenre(GenreDto genre) {
         Genre newGenre = new Genre(genre.getGenreName(), 0f);
         gr.save(newGenre);
-        Map<String, String> data = new HashMap<>();
-        data.put("status", "200");
-        return data;
+        return genreMapper.toDto(newGenre);
     }
 }

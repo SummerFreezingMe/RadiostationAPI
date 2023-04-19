@@ -1,5 +1,6 @@
 package ru.bykov.radiostationapi.repositories;
 
+
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,7 +10,7 @@ import ru.bykov.radiostationapi.domain.Artist;
 
 import java.util.List;
 @Repository
-public class ArtistRepository  {
+public class ArtistRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public ArtistRepository(JdbcTemplate jdbcTemplate) {
@@ -30,7 +31,7 @@ public class ArtistRepository  {
     public void save(Artist artist) {
         jdbcTemplate.update("INSERT INTO artist (artist_id, artist_name) " +
                         "VALUES(?,?)",
-                count()+1, artist.getArtistName());
+                count() + 1, artist.getArtistName());
     }
 
     public void deleteAll() {

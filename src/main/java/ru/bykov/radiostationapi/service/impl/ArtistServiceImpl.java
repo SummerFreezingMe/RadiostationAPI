@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bykov.radiostationapi.domain.Artist;
 import ru.bykov.radiostationapi.domain.dto.ArtistDto;
+import ru.bykov.radiostationapi.mapper.ArtistMapper;
 import ru.bykov.radiostationapi.repositories.ArtistRepository;
 import ru.bykov.radiostationapi.service.ArtistService;
 
@@ -14,21 +15,21 @@ import java.util.Map;
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository ar;
 
+    private final ArtistMapper artistMapper;
     @Autowired
-    public ArtistServiceImpl(ArtistRepository ar) {
+    public ArtistServiceImpl(ArtistRepository ar, ArtistMapper artistMapper) {
         this.ar = ar;
+        this.artistMapper = artistMapper;
     }
 
-    public Map<String, String> addArtist(ArtistDto artist) {
-        Map<String, String> data = new HashMap<>();
+    public ArtistDto addArtist(ArtistDto artist) {
         Artist addition = new Artist(artist.getArtistName());
         ar.save(addition);
-        data.put("status", "200");
-        return data;
+        return artistMapper.toDto(addition);
     }
 
-    public Artist getArtist(Long id) {
-        return ar.findByArtistId(id);
+    public ArtistDto getArtist(Long id) {
+        return artistMapper.toDto(ar.findByArtistId(id));
     }
 
 

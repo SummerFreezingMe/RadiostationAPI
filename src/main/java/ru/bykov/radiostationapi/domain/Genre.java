@@ -17,13 +17,13 @@ public class Genre {
     @Column(name = "genre_id")
     private Long genreId;
 
-    public Genre(String genreName, Float rating) {
-        this.genreName = genreName;
-        this.rating = rating;
-    }
-
     @Column(name = "genre_name")
     private String genreName;
     @Column(name = "rating")
     private Float rating;
+
+    public Genre(String genreName, Float rating) {
+        this.genreName = genreName;
+        this.rating = rating;
+    }
 }
