@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -17,7 +15,6 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public class MusicPieceDto {
-    private JdbcTemplate jdbcTemplate;
     private String title;
 
     private Long authorId;
@@ -30,8 +27,4 @@ public class MusicPieceDto {
 
     private Integer pieceLength;
 
-    @Autowired
-    public MusicPieceDto(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-}
+   }

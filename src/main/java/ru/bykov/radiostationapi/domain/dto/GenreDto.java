@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -17,11 +15,9 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public class GenreDto {
-    private JdbcTemplate jdbcTemplate;
-    private String genreName;
 
-    @Autowired
-    public GenreDto(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private String genreName;
+    private Float rating;
 }
+
+

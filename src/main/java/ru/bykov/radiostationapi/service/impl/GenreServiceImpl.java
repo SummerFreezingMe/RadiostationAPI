@@ -9,7 +9,9 @@ import ru.bykov.radiostationapi.repositories.GenreRepository;
 import ru.bykov.radiostationapi.service.GenreService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -37,5 +39,9 @@ public class GenreServiceImpl implements GenreService {
         Genre newGenre = new Genre(genre.getGenreName(), 0f);
         gr.save(newGenre);
         return genreMapper.toDto(newGenre);
+    }
+
+    public List<GenreDto> findAll() {
+        return gr.findAll().stream().map(genreMapper::toDto).collect(Collectors.toList());
     }
 }
